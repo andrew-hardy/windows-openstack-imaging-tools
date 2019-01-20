@@ -1296,8 +1296,10 @@ function New-WindowsCloudImage {
         Copy-CustomResources -ResourcesDir $resourcesDir -CustomResources $windowsImageConfig.custom_resources_path `
                              -CustomScripts $windowsImageConfig.custom_scripts_path
         Copy-Item $ConfigFilePath "$resourcesDir\config.ini"
-        Set-WindowsWallpaper -WinDrive $winImagePath -WallpaperPath $windowsImageConfig.wallpaper_path `
-            -WallpaperSolidColor $windowsImageConfig.wallpaper_solid_color
+		if ($windowsImageConfig.wallpaper_set) {
+			Set-WindowsWallpaper -WinDrive $winImagePath -WallpaperPath $windowsImageConfig.wallpaper_path `
+				-WallpaperSolidColor $windowsImageConfig.wallpaper_solid_color
+		}
         Download-CloudbaseInit $resourcesDir ([string]$image.ImageArchitecture) -BetaRelease:$windowsImageConfig.beta_release `
                                $windowsImageConfig.msi_path
         Apply-Image $winImagePath $windowsImageConfig.wim_file_path $image.ImageIndex
@@ -1425,8 +1427,10 @@ function New-WindowsFromGoldenImage {
         Copy-CustomResources -ResourcesDir $resourcesDir -CustomResources $windowsImageConfig.custom_resources_path `
                              -CustomScripts $windowsImageConfig.custom_scripts_path
         Copy-Item $ConfigFilePath "$resourcesDir\config.ini"
-        Set-WindowsWallpaper -WinDrive $driveLetterGold -WallpaperPath $windowsImageConfig.wallpaper_path `
-            -WallpaperSolidColor $windowsImageConfig.wallpaper_solid_color
+		if ($windowsImageConfig.wallpaper_set) {
+			Set-WindowsWallpaper -WinDrive $driveLetterGold -WallpaperPath $windowsImageConfig.wallpaper_path `
+				-WallpaperSolidColor $windowsImageConfig.wallpaper_solid_color
+		}
         Download-CloudbaseInit $resourcesDir $imageInfo.imageArchitecture -BetaRelease:$windowsImageConfig.beta_release `
                                $windowsImageConfig.msi_path
         Dismount-VHD -Path $windowsImageConfig.gold_image_path

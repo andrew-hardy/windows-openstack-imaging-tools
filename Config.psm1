@@ -139,6 +139,8 @@ function Get-AvailableConfigOptions {
         @{"Name" = "wallpaper_path";
           "Description" = "If set, it will replace the Cloudbase Solutions wallpaper to the one specified.
                            The wallpaper needs to be a valid .jpg/.jpeg image."},
+        @{"Name" = "wallpaper_set"; "DefaultValue" = $true; "AsBoolean" = $true;
+          "Description" = "Set to false to skip setting custom wallpaper"},
         @{"Name" = "wallpaper_solid_color";
           "Description" = "If set, it will replace the Cloudbase Solutions wallpaper to a solid color.
                            Currently, the only allowed solid color is '0 0 0' (black).
