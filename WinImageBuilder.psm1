@@ -1194,6 +1194,11 @@ function New-WindowsOnlineImage {
                 -VMSwitch $switch.Name -CpuCores $windowsImageConfig.cpu_count `
                 -Generation $generation
         }
+		
+        if($windowsImageConfig.post_creation_script -ne $null) {
+            . $windowsImageConfig.post_creation_script -VirtualDiskPath $VirtualDiskPath
+        }
+		
         Resize-VHDImage $virtualDiskPath
 
         if ($windowsImageConfig.image_type -eq "MAAS") {

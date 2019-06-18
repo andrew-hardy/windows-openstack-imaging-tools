@@ -154,7 +154,8 @@ function Get-AvailableConfigOptions {
           "Description" = "A comma separated list of extra packages (referenced by filepath)
                            to slipstream into the underlying image.
                            This allows additional local packages, like security updates, to be added to the image."}
-
+        @{"Name" = "post_creation_script";
+          "Description" = "A script to be run after the image has been created but before resizing and converting to the final image. This is a great place for any last minute changes to the image such as disabling TamperDetection"}
     )
 }
 
