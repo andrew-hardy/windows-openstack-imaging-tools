@@ -1195,7 +1195,7 @@ function New-WindowsOnlineImage {
                 -Generation $generation
         }
 		
-        if($windowsImageConfig.post_creation_script -ne $null) {
+        if(![string]::IsNullOrWhiteSpace($windowsImageConfig.post_creation_script)) {
             . $windowsImageConfig.post_creation_script -VirtualDiskPath $VirtualDiskPath
         }
 		
