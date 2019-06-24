@@ -905,7 +905,7 @@ function Resize-VHDImage {
     $vhdSizeGB = $vhdSize/1GB
     Write-Log "Initial VHD size is: $vhdSizeGB GB"
 
-    $Drive = (Mount-VHD -Path $VirtualDiskPath -Passthru | Get-Disk | Get-Partition | Get-Volume).DriveLetter
+    $Drive = (Mount-VHD -Path $VirtualDiskPath -Passthru | Get-Disk | Get-Partition | Get-Volume | Sort -Property Size -Descending | Select -First 1).DriveLetter
     try
     {
         Optimize-Volume -DriveLetter $Drive -Defrag -ReTrim -SlabConsolidate
